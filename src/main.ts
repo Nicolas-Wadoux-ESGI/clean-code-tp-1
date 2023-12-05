@@ -13,8 +13,13 @@ const CARRE = {
     repetitionCount: 4,
 }
 
+const YAMS = {
+    point: 50,
+    repetitionCount: 5,
+}
+
 const FIGURES = [
-    BRELAN, CARRE,
+    BRELAN, CARRE, YAMS,
 ]
 
 export const checkRollsValidity = (rolls: number[]) => {
