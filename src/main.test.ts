@@ -1,4 +1,10 @@
-import {getPointsForRoll, getRollByRepetition, checkRollsValidity, getFiguresOrderedByPoints} from "./main";
+import {
+    getPointsForRoll,
+    getRollByRepetition,
+    checkRollsValidity,
+    getFiguresOrderedByPoints,
+    getPointsForRolls
+} from "./main";
 
 const brelan = [1, 2, 3, 2, 2];
 const brelanPoints = 28;
@@ -97,5 +103,29 @@ describe('Yams getFiguresOrderedByPoints', () => {
                 repetitionCount: 3,
             },
         ]);
+    });
+});
+
+describe('Yams getPointsForRolls', () => {
+    it('should return 28+35+50+28+28', () => {
+        const points = getPointsForRolls([
+            [1, 2, 3, 2, 2],
+            [1, 2, 2, 2, 2],
+            [2, 2, 2, 2, 2],
+            [1, 1, 3, 1, 2],
+            [1, 1, 3, 3, 3],
+        ]);
+        expect(points).toBe(28 + 35 + 50 + 28 + 28);
+    });
+
+    it('should return 0', () => {
+        const points = getPointsForRolls([
+            [1, 2, 3, 2, 3],
+            [1, 2, 3, 2, 3],
+            [1, 2, 3, 2, 3],
+            [1, 2, 3, 2, 3],
+            [1, 2, 3, 2, 3],
+        ]);
+        expect(points).toBe(0);
     });
 });
