@@ -27,6 +27,16 @@ describe('Yams getPointsForRoll', () => {
         const points = getPointsForRoll(brelan);
         expect(points).toBe(28);
     });
+
+    it('should return 0 points if there is a brelan of 4', () => {
+        const points = getPointsForRoll([1, 4, 3, 4, 4]);
+        expect(points).toBe(0);
+    });
+
+    it('should return 0 points if there is no brelan', () => {
+        const points = getPointsForRoll([1, 2, 3, 4, 5]);
+        expect(points).toBe(0);
+    });
 });
 
 describe('Yams getDiceValuesWithCount', () => {
