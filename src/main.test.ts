@@ -20,6 +20,11 @@ describe('Yams getPointsForRoll', () => {
             getPointsForRoll([1, 2, 3, 2, 2, 2]);
         }).toThrowError('You must provide 5 rolls');
     });
+
+    it('should return 28 points if there is a brelan of 2', () => {
+        const points = getPointsForRoll(brelan);
+        expect(points).toBe(28);
+    });
 });
 
 describe('Yams getDiceValuesWithCount', () => {
