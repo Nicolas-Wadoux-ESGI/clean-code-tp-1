@@ -65,6 +65,11 @@ describe('Yams getPointsForRoll', () => {
         const points = getPointsForRolls([1, 1, 1, 1, 2]);
         expect(points).toBe(carrePoints);
     });
+
+    it('if brelan and double, it is a full, return 30', () => {
+        const points = getPointsForRolls([1, 1, 1, 2, 2]);
+        expect(points).toBe(30);
+    });
 });
 
 describe('Yams getRollByRepetition', () => {
