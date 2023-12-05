@@ -3,22 +3,27 @@ export interface RollValueCount {
     repetitionCount: number;
 }
 
-const BRELAN = {
+export interface Figure {
+    point: number;
+    repetitionCount: number;
+}
+
+const BRELAN: Figure = {
     point: 28,
     repetitionCount: 3,
 }
 
-const CARRE = {
+const CARRE: Figure = {
     point: 35,
     repetitionCount: 4,
 }
 
-const YAMS = {
+const YAMS: Figure = {
     point: 50,
     repetitionCount: 5,
 }
 
-const FIGURES = [
+const FIGURES: Figure[] = [
     BRELAN, CARRE, YAMS,
 ]
 
@@ -53,7 +58,7 @@ export const getPointsForRoll = (rolls: number[]): number => {
 
     const rollsByRepetition = getRollByRepetition(rolls);
 
-    for (const figure of FIGURES) {
+    for (const figure of getFiguresOrderedByPoints()) {
         const figureRoll = rollsByRepetition.find(rollValueCount => rollValueCount.repetitionCount === figure.repetitionCount);
         if (figureRoll) {
             return figure.point;
@@ -61,4 +66,8 @@ export const getPointsForRoll = (rolls: number[]): number => {
     }
 
     return 0;
+}
+
+export const getFiguresOrderedByPoints = (): Figure[] => {
+    return FIGURES.sort((previousFigure, nextFigure) => nextFigure.point - previousFigure.point);
 }
