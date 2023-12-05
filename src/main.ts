@@ -67,7 +67,8 @@ export const getPointsForRoll = (rolls: number[]): number => {
         }
     }
 
-    return 0;
+    // if no figure, return total points
+    return rolls.reduce((total, rollValue) => total + rollValue, 0);
 }
 
 export const getPointsForRolls = (rolls: number[][]): number => {
