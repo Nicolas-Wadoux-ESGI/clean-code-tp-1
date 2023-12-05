@@ -2,7 +2,7 @@ import {getPointsForRoll} from "./main";
 
 const brelan = [1, 2, 3, 2, 2];
 
-describe('Test initialisation', () => {
+describe('Yams', () => {
     it('should test', () => {
         expect(true).toBe(true);
     });
@@ -17,5 +17,9 @@ describe('Test initialisation', () => {
         expect(() => {
             getPointsForRoll([1, 2, 3, 2, 2, 2]);
         }).toThrowError('You must provide 5 rolls');
+    });
+
+    it('shoudl return 28 if there is a brelan of 2', () => {
+        expect(getPointsForRoll(brelan)).toBe(28);
     });
 });
