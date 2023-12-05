@@ -1,6 +1,29 @@
+export interface RollValueCount {
+    rollValue: number;
+    repetitionCount: number;
+}
+
 const BRELAN = {
     point: 28,
     repetitionCount: 3,
+}
+
+export const getDiceValuesWithCount = (rolls: number[]): RollValueCount[] => {
+    const rollCounts: RollValueCount[] = []
+
+    for (const roll of rolls) {
+        const addedRollCount = rollCounts.find(rollValueCount => rollValueCount.rollValue === roll);
+        if (!addedRollCount) {
+            rollCounts.push({
+                rollValue: roll,
+                repetitionCount: 1,
+            })
+        } else {
+            addedRollCount.repetitionCount = addedRollCount.repetitionCount + 1;
+        }
+    }
+
+    return rollCounts;
 }
 
 export const getPointsForRoll = (rolls: number[]) => {
@@ -12,8 +35,5 @@ export const getPointsForRoll = (rolls: number[]) => {
     if (numberOf2 === BRELAN.repetitionCount) {
         return BRELAN.point;
     }
-}
 
-module.exports = {
-    getPointsForRoll
-};
+}
