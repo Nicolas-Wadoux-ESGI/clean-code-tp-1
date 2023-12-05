@@ -12,6 +12,8 @@ const carre = [1, 2, 2, 2, 2];
 const carrePoints = 35;
 const yams = [2, 2, 2, 2, 2];
 const yamsPoints = 50;
+const suite = [1, 2, 3, 4, 5];
+const suitePoints = 40;
 
 describe('init test', () => {
     it('should test', () => {
@@ -58,6 +60,16 @@ describe('Yams Figures', () => {
     it('full isFigure should return false if there is no full', () => {
         const rollCounts = getRollByRepetition([1, 2, 3, 4, 5]);
         expect(FIGURES[3].isFigure(rollCounts)).toBe(false);
+    });
+
+    it('suite isFigure should return true if there is a suite', () => {
+        const rollCounts = getRollByRepetition(suite);
+        expect(FIGURES[4].isFigure(rollCounts)).toBe(true);
+    });
+
+    it('suite isFigure should return false if there is no suite', () => {
+        const rollCounts = getRollByRepetition([1, 2, 3, 4, 6]);
+        expect(FIGURES[4].isFigure(rollCounts)).toBe(false);
     });
 });
 
@@ -111,6 +123,11 @@ describe('Yams getPointsForRoll', () => {
     it('if brelan and double, it is a full, return 30', () => {
         const points = getPointsForRolls([1, 1, 1, 2, 2]);
         expect(points).toBe(30);
+    });
+
+    it('if suite, return 40', () => {
+        const points = getPointsForRolls(suite);
+        expect(points).toBe(suitePoints);
     });
 });
 

@@ -40,8 +40,28 @@ const FULL: Figure = {
     }
 }
 
+const SUITE: Figure = {
+    point: 40,
+    isFigure: (rollCounts: RollValueCount[]) => {
+        if (rollCounts.length !== NUMBER_OF_ROLLS) {
+            return false;
+        }
+
+        const rollValues = rollCounts.map(rollCount => rollCount.rollValue).sort();
+        while (rollValues.length > 1) {
+            const previousRollValue = rollValues.shift();
+            const nextRollValue = rollValues[0];
+            if (previousRollValue !== undefined && nextRollValue != undefined && nextRollValue - previousRollValue !== 1) {
+                return false;
+            }
+        }
+
+        return true
+    }
+}
+
 export const FIGURES: Figure[] = [
-    BRELAN, CARRE, YAMS, FULL
+    BRELAN, CARRE, YAMS, FULL, SUITE
 ]
 
 const NUMBER_OF_ROLLS = 5;
