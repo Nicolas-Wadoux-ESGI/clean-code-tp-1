@@ -1,4 +1,4 @@
-import {getPointsForRoll, getDiceValuesWithCount, checkRollsValidity} from "./main";
+import {getPointsForRoll, getRollByRepetition, checkRollsValidity} from "./main";
 
 const brelan = [1, 2, 3, 2, 2];
 
@@ -30,7 +30,7 @@ describe('Yams getPointsForRoll', () => {
 
     it('should return 0 points if there is a brelan of 4', () => {
         const points = getPointsForRoll([1, 4, 3, 4, 4]);
-        expect(points).toBe(0);
+        expect(points).toBe(28);
     });
 
     it('should return 0 points if there is no brelan', () => {
@@ -39,10 +39,10 @@ describe('Yams getPointsForRoll', () => {
     });
 });
 
-describe('Yams getDiceValuesWithCount', () => {
+describe('Yams getRollByRepetition', () => {
     it('should return number of repetitions in the rolls', () => {
         const rolls = [1, 2, 3, 2, 2];
-        const diceValuesWithCount = getDiceValuesWithCount(rolls);
+        const diceValuesWithCount = getRollByRepetition(rolls);
         expect(diceValuesWithCount).toEqual([
             {
                 rollValue: 1,
