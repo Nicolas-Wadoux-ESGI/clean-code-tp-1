@@ -14,7 +14,7 @@ export const checkRollsValidity = (rolls: number[]) => {
     }
 };
 
-export const getDiceValuesWithCount = (rolls: number[]): RollValueCount[] => {
+export const getRollByRepetition = (rolls: number[]): RollValueCount[] => {
     checkRollsValidity(rolls);
 
     const rollCounts: RollValueCount[] = []
@@ -34,12 +34,14 @@ export const getDiceValuesWithCount = (rolls: number[]): RollValueCount[] => {
     return rollCounts;
 }
 
-export const getPointsForRoll = (rolls: number[]) => {
+export const getPointsForRoll = (rolls: number[]): number => {
     checkRollsValidity(rolls);
 
-    const numberOf2 = rolls.filter(roll => roll === 2).length;
-    if (numberOf2 === BRELAN.repetitionCount) {
+    const rollsByRepetition = getRollByRepetition(rolls);
+    const hasBrelanInRolls = rollsByRepetition.some(rollByRepetition => rollByRepetition.repetitionCount === BRELAN.repetitionCount);
+    if (hasBrelanInRolls) {
         return BRELAN.point;
     }
 
+    return 0;
 }
