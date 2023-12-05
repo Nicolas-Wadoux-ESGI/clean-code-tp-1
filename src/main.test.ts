@@ -1,9 +1,9 @@
 import {
-    getPointsForRoll,
+    getPointsForRolls,
     getRollByRepetition,
     checkRollsValidity,
     getFiguresOrderedByPoints,
-    getPointsForRolls
+    getPointsForLaunches
 } from "./main";
 
 const brelan = [1, 2, 3, 2, 2];
@@ -35,34 +35,34 @@ describe('Yams checkRollsValidity', () => {
 
 describe('Yams getPointsForRoll', () => {
     it('should return 28 points if there is a brelan of 2', () => {
-        const points = getPointsForRoll(brelan);
+        const points = getPointsForRolls(brelan);
         expect(points).toBe(brelanPoints);
     });
 
     it('should return 28 points if there is a brelan of 4', () => {
-        const points = getPointsForRoll([1, 4, 3, 4, 4]);
+        const points = getPointsForRolls([1, 4, 3, 4, 4]);
         expect(points).toBe(brelanPoints);
     });
 
     it('should return total points if there is no figure', () => {
         const roll = [1, 4, 3, 2, 4];
-        const points = getPointsForRoll(roll);
+        const points = getPointsForRolls(roll);
         const chanceTotalPoints = roll.reduce((acc, point) => acc + point, 0);
         expect(points).toBe(chanceTotalPoints);
     });
 
     it('should return 35 points if there is a carre', () => {
-        const points = getPointsForRoll(carre);
+        const points = getPointsForRolls(carre);
         expect(points).toBe(carrePoints);
     });
 
     it('should return 50 if there is a yams', () => {
-        const points = getPointsForRoll(yams);
+        const points = getPointsForRolls(yams);
         expect(points).toBe(yamsPoints);
     });
 
     it('if brelan or carre, return one with the highest value', () => {
-        const points = getPointsForRoll([1, 1, 1, 1, 2]);
+        const points = getPointsForRolls([1, 1, 1, 1, 2]);
         expect(points).toBe(carrePoints);
     });
 });
@@ -110,7 +110,7 @@ describe('Yams getFiguresOrderedByPoints', () => {
 
 describe('Yams getPointsForRolls', () => {
     it('should return 28+35+50+28+28', () => {
-        const points = getPointsForRolls([
+        const points = getPointsForLaunches([
             [1, 2, 3, 2, 2],
             [1, 2, 2, 2, 2],
             [2, 2, 2, 2, 2],
@@ -121,7 +121,7 @@ describe('Yams getPointsForRolls', () => {
     });
 
     it('should return total if no figure (using chance)', () => {
-        const points = getPointsForRolls([
+        const points = getPointsForLaunches([
             [1, 2, 3, 2, 3],
             [1, 2, 3, 2, 3],
             [1, 2, 3, 2, 3],
@@ -132,7 +132,7 @@ describe('Yams getPointsForRolls', () => {
     });
 
     it('should return 139', () => {
-        const points = getPointsForRolls([
+        const points = getPointsForLaunches([
             brelan,
             yams,
             [2, 1, 2, 4, 6],

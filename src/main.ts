@@ -55,7 +55,7 @@ export const getRollByRepetition = (rolls: number[]): RollValueCount[] => {
     return rollCounts;
 }
 
-export const getPointsForRoll = (rolls: number[]): number => {
+export const getPointsForRolls = (rolls: number[]): number => {
     checkRollsValidity(rolls);
 
     const rollsByRepetition = getRollByRepetition(rolls);
@@ -71,11 +71,11 @@ export const getPointsForRoll = (rolls: number[]): number => {
     return rolls.reduce((total, rollValue) => total + rollValue, 0);
 }
 
-export const getPointsForRolls = (rolls: number[][]): number => {
+export const getPointsForLaunches = (launches: number[][]): number => {
     let points = 0;
 
-    for (const roll of rolls) {
-        points = points + getPointsForRoll(roll);
+    for (const rolls of launches) {
+        points = points + getPointsForRolls(rolls);
     }
 
     return points;
