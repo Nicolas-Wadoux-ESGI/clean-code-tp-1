@@ -1,4 +1,4 @@
-import {getPointsForRoll, getRollByRepetition, checkRollsValidity} from "./main";
+import {getPointsForRoll, getRollByRepetition, checkRollsValidity, getFiguresOrderedByPoints} from "./main";
 
 const brelan = [1, 2, 3, 2, 2];
 const brelanPoints = 28;
@@ -52,6 +52,11 @@ describe('Yams getPointsForRoll', () => {
         const points = getPointsForRoll(yams);
         expect(points).toBe(yamsPoints);
     });
+
+    it('if brelan or carre, return one with the highest value', () => {
+        const points = getPointsForRoll([1, 1, 1, 1, 2]);
+        expect(points).toBe(carrePoints);
+    });
 });
 
 describe('Yams getRollByRepetition', () => {
@@ -70,6 +75,26 @@ describe('Yams getRollByRepetition', () => {
             {
                 rollValue: 3,
                 repetitionCount: 1,
+            },
+        ]);
+    });
+});
+
+describe('Yams getFiguresOrderedByPoints', () => {
+    it('should return figures ordered by points', () => {
+        const figures = getFiguresOrderedByPoints();
+        expect(figures).toEqual([
+            {
+                point: 50,
+                repetitionCount: 5,
+            },
+            {
+                point: 35,
+                repetitionCount: 4,
+            },
+            {
+                point: 28,
+                repetitionCount: 3,
             },
         ]);
     });
