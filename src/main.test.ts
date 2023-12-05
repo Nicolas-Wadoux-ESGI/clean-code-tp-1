@@ -19,7 +19,13 @@ describe('Yams', () => {
         }).toThrowError('You must provide 5 rolls');
     });
 
-    it('shoudl return 28 if there is a brelan of 2', () => {
+    it('should return 28 if there is a brelan of 2', () => {
         expect(getPointsForRoll(brelan)).toBe(28);
+    });
+    it('should return 28 if there is a brelan of 3', () => {
+        expect(getPointsForRoll([1, 2, 3, 3, 3])).toBe(28);
+    });
+    it('should return 28 if there is a brelan of 4', () => {
+        expect(getPointsForRoll([1, 4, 3, 4, 4])).toBe(28);
     });
 });
