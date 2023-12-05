@@ -5,26 +5,43 @@ export interface RollValueCount {
 
 export interface Figure {
     point: number;
-    repetitionCount: number;
+    isFigure: (rollCounts: RollValueCount[]) => boolean;
 }
 
+const BRELAN_REPETITION_COUNT = 3;
 const BRELAN: Figure = {
     point: 28,
-    repetitionCount: 3,
+    isFigure: (rollCounts: RollValueCount[]) => {
+        return rollCounts.some(rollCount => rollCount.repetitionCount === BRELAN_REPETITION_COUNT);
+    },
 }
 
+const CARRE_REPETITION_COUNT = 4;
 const CARRE: Figure = {
     point: 35,
-    repetitionCount: 4,
+    isFigure: (rollCounts: RollValueCount[]) => {
+        return rollCounts.some(rollCount => rollCount.repetitionCount === CARRE_REPETITION_COUNT);
+    },
 }
 
+const YAMS_REPETITION_COUNT = 5;
 const YAMS: Figure = {
     point: 50,
-    repetitionCount: 5,
+    isFigure: (rollCounts: RollValueCount[]) => {
+        return rollCounts.every(rollCount => rollCount.repetitionCount === YAMS_REPETITION_COUNT);
+    },
 }
 
-const FIGURES: Figure[] = [
-    BRELAN, CARRE, YAMS,
+const DOUBLE_REPETITION_COUNT = 2;
+const FULL: Figure = {
+    point: 30,
+    isFigure: (rollCounts: RollValueCount[]) => {
+        return rollCounts.some(rollCount => rollCount.repetitionCount === BRELAN_REPETITION_COUNT) && rollCounts.some(rollCount => rollCount.repetitionCount === DOUBLE_REPETITION_COUNT);
+    }
+}
+
+export const FIGURES: Figure[] = [
+    BRELAN, CARRE, YAMS, FULL
 ]
 
 const NUMBER_OF_ROLLS = 5;
@@ -61,8 +78,7 @@ export const getPointsForRolls = (rolls: number[]): number => {
     const rollsByRepetition = getRollByRepetition(rolls);
 
     for (const figure of getFiguresOrderedByPoints()) {
-        const figureRoll = rollsByRepetition.find(rollValueCount => rollValueCount.repetitionCount === figure.repetitionCount);
-        if (figureRoll) {
+        if (figure.isFigure(rollsByRepetition)) {
             return figure.point;
         }
     }

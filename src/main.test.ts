@@ -3,7 +3,7 @@ import {
     getRollByRepetition,
     checkRollsValidity,
     getFiguresOrderedByPoints,
-    getPointsForLaunches
+    getPointsForLaunches, FIGURES
 } from "./main";
 
 const brelan = [1, 2, 3, 2, 2];
@@ -96,25 +96,12 @@ describe('Yams getRollByRepetition', () => {
 describe('Yams getFiguresOrderedByPoints', () => {
     it('should return figures ordered by points', () => {
         const figures = getFiguresOrderedByPoints();
-        expect(figures).toEqual([
-            {
-                point: 50,
-                repetitionCount: 5,
-            },
-            {
-                point: 35,
-                repetitionCount: 4,
-            },
-            {
-                point: 28,
-                repetitionCount: 3,
-            },
-        ]);
+        expect(figures).toEqual(FIGURES.sort((a, b) => b.point - a.point));
     });
 });
 
 describe('Yams getPointsForRolls', () => {
-    it('should return 28+35+50+28+28', () => {
+    it('should return 28+35+50+28+30', () => {
         const points = getPointsForLaunches([
             [1, 2, 3, 2, 2],
             [1, 2, 2, 2, 2],
@@ -122,7 +109,7 @@ describe('Yams getPointsForRolls', () => {
             [1, 1, 3, 1, 2],
             [1, 1, 3, 3, 3],
         ]);
-        expect(points).toBe(28 + 35 + 50 + 28 + 28);
+        expect(points).toBe(28 + 35 + 50 + 28 + 30);
     });
 
     it('should return total if no figure (using chance)', () => {
