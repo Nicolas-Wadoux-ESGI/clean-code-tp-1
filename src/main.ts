@@ -27,9 +27,11 @@ const FIGURES: Figure[] = [
     BRELAN, CARRE, YAMS,
 ]
 
+const NUMBER_OF_ROLLS = 5;
+
 export const checkRollsValidity = (rolls: number[]) => {
-    if (!Array.isArray(rolls) || rolls.length !== 5) {
-        throw new Error('You must provide 5 rolls');
+    if (!Array.isArray(rolls) || rolls.length !== NUMBER_OF_ROLLS) {
+        throw new Error('You must provide ' + NUMBER_OF_ROLLS + ' rolls');
     }
 };
 
