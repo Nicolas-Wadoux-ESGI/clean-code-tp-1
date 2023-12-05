@@ -70,6 +70,16 @@ export const getPointsForRoll = (rolls: number[]): number => {
     return 0;
 }
 
+export const getPointsForRolls = (rolls: number[][]): number => {
+    let points = 0;
+
+    for (const roll of rolls) {
+        points = points + getPointsForRoll(roll);
+    }
+
+    return points;
+}
+
 export const getFiguresOrderedByPoints = (): Figure[] => {
     return FIGURES.sort((previousFigure, nextFigure) => nextFigure.point - previousFigure.point);
 }
