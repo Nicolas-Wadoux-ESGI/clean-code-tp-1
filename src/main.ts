@@ -13,6 +13,10 @@ const CARRE = {
     repetitionCount: 4,
 }
 
+const FIGURES = [
+    BRELAN, CARRE,
+]
+
 export const checkRollsValidity = (rolls: number[]) => {
     if (!Array.isArray(rolls) || rolls.length !== 5) {
         throw new Error('You must provide 5 rolls');
@@ -43,14 +47,12 @@ export const getPointsForRoll = (rolls: number[]): number => {
     checkRollsValidity(rolls);
 
     const rollsByRepetition = getRollByRepetition(rolls);
-    const hasBrelanInRolls = rollsByRepetition.some(rollByRepetition => rollByRepetition.repetitionCount === BRELAN.repetitionCount);
-    if (hasBrelanInRolls) {
-        return BRELAN.point;
-    }
 
-    const hasCarreInRolls = rollsByRepetition.some(rollByRepetition => rollByRepetition.repetitionCount === CARRE.repetitionCount);
-    if (hasCarreInRolls) {
-        return CARRE.point;
+    for (const figure of FIGURES) {
+        const figureRoll = rollsByRepetition.find(rollValueCount => rollValueCount.repetitionCount === figure.repetitionCount);
+        if (figureRoll) {
+            return figure.point;
+        }
     }
 
     return 0;
