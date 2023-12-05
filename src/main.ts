@@ -8,6 +8,11 @@ const BRELAN = {
     repetitionCount: 3,
 }
 
+const CARRE = {
+    point: 35,
+    repetitionCount: 4,
+}
+
 export const checkRollsValidity = (rolls: number[]) => {
     if (!Array.isArray(rolls) || rolls.length !== 5) {
         throw new Error('You must provide 5 rolls');
@@ -41,6 +46,11 @@ export const getPointsForRoll = (rolls: number[]): number => {
     const hasBrelanInRolls = rollsByRepetition.some(rollByRepetition => rollByRepetition.repetitionCount === BRELAN.repetitionCount);
     if (hasBrelanInRolls) {
         return BRELAN.point;
+    }
+
+    const hasCarreInRolls = rollsByRepetition.some(rollByRepetition => rollByRepetition.repetitionCount === CARRE.repetitionCount);
+    if (hasCarreInRolls) {
+        return CARRE.point;
     }
 
     return 0;
