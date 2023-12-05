@@ -1,7 +1,11 @@
 import {getPointsForRoll, getRollByRepetition, checkRollsValidity} from "./main";
 
 const brelan = [1, 2, 3, 2, 2];
+const brelanPoints = 28;
 const carre = [1, 2, 2, 2, 2];
+const carrePoints = 35;
+const yams = [2, 2, 2, 2, 2];
+const yamsPoints = 50;
 
 describe('init test', () => {
     it('should test', () => {
@@ -26,12 +30,12 @@ describe('Yams checkRollsValidity', () => {
 describe('Yams getPointsForRoll', () => {
     it('should return 28 points if there is a brelan of 2', () => {
         const points = getPointsForRoll(brelan);
-        expect(points).toBe(28);
+        expect(points).toBe(brelanPoints);
     });
 
     it('should return 0 points if there is a brelan of 4', () => {
         const points = getPointsForRoll([1, 4, 3, 4, 4]);
-        expect(points).toBe(28);
+        expect(points).toBe(brelanPoints);
     });
 
     it('should return 0 points if there is no brelan', () => {
@@ -41,7 +45,12 @@ describe('Yams getPointsForRoll', () => {
 
     it('should return 35 points if there is a carre', () => {
         const points = getPointsForRoll(carre);
-        expect(points).toBe(35);
+        expect(points).toBe(carrePoints);
+    });
+
+    it('should return 50 if there is a yams', () => {
+        const points = getPointsForRoll(yams);
+        expect(points).toBe(yamsPoints);
     });
 });
 
