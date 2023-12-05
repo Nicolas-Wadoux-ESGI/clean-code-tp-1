@@ -1,4 +1,4 @@
-import {getPointsForRoll, getDiceValuesWithCount} from "./main";
+import {getPointsForRoll, getDiceValuesWithCount, checkRollsValidity} from "./main";
 
 const brelan = [1, 2, 3, 2, 2];
 
@@ -8,19 +8,21 @@ describe('init test', () => {
     });
 });
 
-describe('Yams getPointsForRoll', () => {
+describe('Yams checkRollsValidity', () => {
     it('should throw an error if there is less than 5 rolls provided', () => {
         expect(() => {
-            getPointsForRoll([1, 2, 3, 2]);
+            checkRollsValidity([1, 2, 3, 2]);
         }).toThrowError('You must provide 5 rolls');
     });
 
     it('should throw an error if there is more than 5 rolls provided', () => {
         expect(() => {
-            getPointsForRoll([1, 2, 3, 2, 2, 2]);
+            checkRollsValidity([1, 2, 3, 2, 2, 2]);
         }).toThrowError('You must provide 5 rolls');
     });
+});
 
+describe('Yams getPointsForRoll', () => {
     it('should return 28 points if there is a brelan of 2', () => {
         const points = getPointsForRoll(brelan);
         expect(points).toBe(28);

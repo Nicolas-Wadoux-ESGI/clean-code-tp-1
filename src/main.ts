@@ -8,7 +8,15 @@ const BRELAN = {
     repetitionCount: 3,
 }
 
+export const checkRollsValidity = (rolls: number[]) => {
+    if (!Array.isArray(rolls) || rolls.length !== 5) {
+        throw new Error('You must provide 5 rolls');
+    }
+};
+
 export const getDiceValuesWithCount = (rolls: number[]): RollValueCount[] => {
+    checkRollsValidity(rolls);
+
     const rollCounts: RollValueCount[] = []
 
     for (const roll of rolls) {
@@ -27,9 +35,7 @@ export const getDiceValuesWithCount = (rolls: number[]): RollValueCount[] => {
 }
 
 export const getPointsForRoll = (rolls: number[]) => {
-    if (!Array.isArray(rolls) || rolls.length !== 5) {
-        throw new Error('You must provide 5 rolls');
-    }
+    checkRollsValidity(rolls);
 
     const numberOf2 = rolls.filter(roll => roll === 2).length;
     if (numberOf2 === BRELAN.repetitionCount) {
