@@ -39,14 +39,16 @@ describe('Yams getPointsForRoll', () => {
         expect(points).toBe(brelanPoints);
     });
 
-    it('should return 0 points if there is a brelan of 4', () => {
+    it('should return 28 points if there is a brelan of 4', () => {
         const points = getPointsForRoll([1, 4, 3, 4, 4]);
         expect(points).toBe(brelanPoints);
     });
 
-    it('should return 0 points if there is no brelan', () => {
-        const points = getPointsForRoll([1, 2, 3, 4, 5]);
-        expect(points).toBe(0);
+    it('should return total points if there is no figure', () => {
+        const roll = [1, 4, 3, 2, 4];
+        const points = getPointsForRoll(roll);
+        const chanceTotalPoints = roll.reduce((acc, point) => acc + point, 0);
+        expect(points).toBe(chanceTotalPoints);
     });
 
     it('should return 35 points if there is a carre', () => {
@@ -118,7 +120,7 @@ describe('Yams getPointsForRolls', () => {
         expect(points).toBe(28 + 35 + 50 + 28 + 28);
     });
 
-    it('should return 0', () => {
+    it('should return total if no figure (using chance)', () => {
         const points = getPointsForRolls([
             [1, 2, 3, 2, 3],
             [1, 2, 3, 2, 3],
@@ -126,6 +128,17 @@ describe('Yams getPointsForRolls', () => {
             [1, 2, 3, 2, 3],
             [1, 2, 3, 2, 3],
         ]);
-        expect(points).toBe(0);
+        expect(points).toBe(5 * (1 + 2 + 3 + 2 + 3));
+    });
+
+    it('should return 139', () => {
+        const points = getPointsForRolls([
+            brelan,
+            yams,
+            [2, 1, 2, 4, 6],
+            carre,
+            [1, 2, 3, 2, 3],
+        ]);
+        expect(points).toBe(28 + 50 + 15 + 35 + 11);
     });
 });
